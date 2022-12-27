@@ -79,10 +79,14 @@ public class Task1 {
 				Teacher teacher1 = new Teacher();
 
 				System.out.println(cyan + "Enter Teacher Name");
+				String tname = sc.next();
+				stackHis.push(tname);
 				teacher1.setTeacherName(sc.next());
 
 				System.out.println(brightYellow + "Enter Teacher id");
-				teacher1.setTeacherId(sc.nextInt());
+				Integer Tid = sc.nextInt();
+				teacher1.setTeacherId(sc.nextInt(Tid));
+				stackHis.push(Tid.toString() );
 				departmentX.teacherList.add(teacher1);
 
 				////////// add while loop//////////////
@@ -125,6 +129,8 @@ public class Task1 {
 
 					}
 					condtion3 = true;
+					
+					
 
 				}
 
