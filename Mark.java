@@ -2,17 +2,15 @@ package scr;
 
 public class Mark {
 	
-	private int mark;
+	private double mark;
 
-	public int getMark() {
+	public double getMark() {
 		return mark;
 	}
 
-	public void setMark(int mark) {
-		this.mark = mark;
+	public void setMark(double d) {
+		this.mark = d;
 	}
-	
-	
 	
 
 }

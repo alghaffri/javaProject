@@ -6,6 +6,13 @@ public class Department {
 	private String name;
 	private int size;
 	
+	
+	Department(String name,int size)
+	{
+		System.out.println("This is first Department" + name +""+ size);
+	this.name = name;
+	this.size = size;
+	}
 	Teacher teacher1 = new Teacher();
 	ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
 	
