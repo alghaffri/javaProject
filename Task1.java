@@ -1,6 +1,7 @@
 package scr;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +32,9 @@ public class Task1 {
 
 			System.out.println("2 - Display History in text file ");
 
-		
+			System.out.println("3 - Display History in console ");
+			System.out.println("4 - Search for word ");
+			System.out.println("5 - Exit");
 
 			int option1 = sc.nextInt();
 
@@ -79,14 +82,11 @@ public class Task1 {
 				Teacher teacher1 = new Teacher();
 
 				System.out.println(cyan + "Enter Teacher Name");
-				String tname = sc.next();
-				stackHis.push(tname);
 				teacher1.setTeacherName(sc.next());
-
+				
+				
 				System.out.println(brightYellow + "Enter Teacher id");
-				Integer Tid = sc.nextInt();
-				teacher1.setTeacherId(sc.nextInt(Tid));
-				stackHis.push(Tid.toString() );
+				teacher1.setTeacherId(sc.nextInt());
 				departmentX.teacherList.add(teacher1);
 
 				////////// add while loop//////////////
@@ -187,19 +187,18 @@ public class Task1 {
 					}
 			
 				}
-				System.out.println(brightYellow + "+++ Good bye +++");
+		
 		}}}
 			else if (option1 == 2){
 
 					System.out.println("============== History ==============");
-					
-
 					System.out.println("++++ School Details ++++");
+					System.out.println("Print to a text file");
 					File f1 = new File("C:\\Users\\Lenovo\\eclipse-workspace\\Test\\src\\scr\\HistoryFile.txt");
+					
+					
 					try {
 						FileWriter f2 = new FileWriter(f1);
-						
-
 					for(String s : stackHis) {
 						f2.write("\n");
 						f2.write(s);
@@ -215,6 +214,50 @@ public class Task1 {
 					}
 
 		}
+			else if(option1 == 3) {
+				
+				try {
+				      File f3 = new File("C:\\\\Users\\\\Lenovo\\\\eclipse-workspace\\\\Test\\\\src\\\\scr\\\\HistoryFile.txt");
+				      Scanner file1 = new Scanner(f3);
+				      while (file1.hasNextLine()) {
+				        String data = file1.nextLine();
+				        System.out.println(data);
+				      }
+				      file1.close();
+				    } catch (FileNotFoundException e) {
+				      System.out.println("Error.");
+				      e.printStackTrace();
+				    }
+			}
+			else if(option1 == 4) {
+		        
+		        System.out.print(" Enter Word to search ");
+		        String input = sc.next();
+		        int count = 0;
+		        File file4 = new File("C:\\\\\\\\Users\\\\\\\\Lenovo\\\\\\\\eclipse-workspace\\\\\\\\Test\\\\\\\\src\\\\\\\\scr\\\\\\\\HistoryFile.txt");
+		        try {
+		        	
+		        	Scanner sr = new Scanner(file4);
+		        	while(sr.hasNext()){
+		        		String[] stringCount = sr.nextLine().split(" ");
+		        		for(int i = 0; i < stringCount.length; i++) {
+		        		if(input.equalsIgnoreCase(stringCount[i])) {
+		        			count++;
+		        		}
+		        	}  
+			
+		        	} 
+		        	System.out.println(" The Word exists " + count + " Times ");
+		        	sr.close();
+		        }
+		        catch (FileNotFoundException e) {
+				      System.out.println("Error.");
+				      e.printStackTrace();
+				    }
+		        	
+			
+			}
+
 
 					else {
 
@@ -223,7 +266,7 @@ public class Task1 {
 					}
 		
 				
-			}
+			}		System.out.println(brightYellow + "+++ Good bye +++");
 		
 		sc.close();
 	}
