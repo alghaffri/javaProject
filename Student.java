@@ -1,8 +1,9 @@
 package scr;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Student {
+public class Student implements Serializable {
 	private String studentName;
 	private int studentAge;
 	
@@ -30,4 +31,5 @@ public class Student {
 		
 	
 	}
+
 }

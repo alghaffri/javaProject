@@ -1,6 +1,8 @@
 package scr;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable{
 	private String courseName;
 	private String courseType;
 	private int courseId;

@@ -1,10 +1,11 @@
 package scr;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Teacher {
+public class Teacher implements Serializable {
 	private String teacherName;
-	private int teacherId;
+	 private int teacherId;
 	
 	Student student1 = new Student();
 	ArrayList<Student> studentList = new ArrayList<Student>();

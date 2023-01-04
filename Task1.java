@@ -1,12 +1,17 @@
 package scr;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
+import java.io.Serializable;
 
 public class Task1 {
 	public static void main(String[] args) {
@@ -15,6 +20,8 @@ public class Task1 {
 		Stack<String> stackHis = new Stack<String>();
 
 		School school = new School("Muscat", 43432);
+		Student student1 = new Student();
+		
 		Scanner sc = new Scanner(System.in);
 		ArrayList<Department> departmentList = new ArrayList<Department>();
 		Boolean condtion = true;
@@ -80,39 +87,82 @@ public class Task1 {
 
 			while (condtion1) {
 				Teacher teacher1 = new Teacher();
-
 				System.out.println(cyan + "Enter Teacher Name");
-				teacher1.setTeacherName(sc.next());
-				
-				
+				String tname = sc.next();
+				teacher1.setTeacherName(tname);
+				stackHis.push(tname);
 				System.out.println(brightYellow + "Enter Teacher id");
-				teacher1.setTeacherId(sc.nextInt());
-				departmentX.teacherList.add(teacher1);
+				Integer tid= sc.nextInt();
+				teacher1.setTeacherId(tid);
+				stackHis.push(tid.toString());
+				//Serializarion
+				 try{
+				       FileOutputStream file = new FileOutputStream("C:\\Users\\Lenovo\\eclipse-workspace\\Test\\src\\scr\\teacherfile.txt");
+				       ObjectOutputStream out = new ObjectOutputStream(file);
+				       out.writeObject(teacher1);
+				       out.close();
+				       file.close();
+				       System.out.println("serialized and saved");
+				       
+				   }catch (Exception e){
+				     e.printStackTrace();
+				   }	
+				 
+				 
+				//De-serializarion
+				    try
+				   {
+				        // Reading the object from a file
+				        FileInputStream file = new FileInputStream("C:\\Users\\Lenovo\\eclipse-workspace\\Test\\src\\scr\\teacherfile.txt");
+				        ObjectInputStream in = new ObjectInputStream(file);
+				        // Method for deserialization of object
+				        Teacher object1 = (Teacher) in.readObject();
+				        in.close();
+				        file.close();
+				        System.out.println("Object has been deserialized ");
+				        System.out.println("Teacher Name:  " + object1.getTeacherName());
+				        System.out.println("Teacher ID:  " + object1.getTeacherId());
+				    }
+				    catch(IOException ex)
+				    {
+				        System.out.println("IOException is caught");
+				    }
+				    catch(ClassNotFoundException ex)
+				    {
+				        System.out.println("ClassNotFoundException is caught");
+				    }
 
+			
+				
 				////////// add while loop//////////////
 
 				while (condtion2) {
 
-					Student student1 = new Student();
+					
 
 					System.out.println(cyan + "Enter Student Name");
-					student1.setStudentName(sc.next());
-
+					String sname=sc.next();
+					student1.setStudentName(sname);
+					stackHis.push(sname);
 					System.out.println(brightYellow + "Enter Student Age");
-					student1.setStudentAge(sc.nextInt());
-
+					Integer sAge =sc.nextInt();
+					student1.setStudentAge(sAge);
+					stackHis.push(sAge.toString());
 					while (condtion3) {
 						Course course1 = new Course();
 
 						System.out.println(cyan + "Enter Course Name");
-						course1.setCourseName(sc.next());
-
+						String cName=sc.next();
+						course1.setCourseName(cName);
+						stackHis.push(cName);
 						System.out.println(brightYellow + "Enter Course ID");
-						course1.setCourseId(sc.nextInt());
-
+						Integer cId=sc.nextInt();
+						course1.setCourseId(cId);
+						stackHis.push(cId.toString());
 						System.out.println(cyan + "Enter Mark");
-						course1.mark1.setMark(sc.nextDouble());
-
+						Double mark1= sc.nextDouble();
+						course1.mark1.setMark(mark1);
+						stackHis.push(mark1.toString());
 						student1.courseList.add(course1);
 						System.out.println(brightYellow + "Do you want to add another Course 1 if yes");
 						if (sc.nextInt() != 1) {
@@ -133,7 +183,7 @@ public class Task1 {
 					
 
 				}
-
+				departmentX.teacherList.add(teacher1);
 				System.out.println("Do you want to add another Teacher 1 if yes");
 				if (sc.nextInt() != 1) {
 					condtion1 = false;
@@ -143,12 +193,11 @@ public class Task1 {
 
 			}
 			
-	
-		{
-			
-		}
 
-			departmentList.add(departmentX);
+			 
+			 
+			 
+			 departmentList.add(departmentX);
 			System.out.println("Do you want add another Department 1 if yes");
 			condtion1 = true;
 			condtion2 = true;
